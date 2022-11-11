@@ -43,5 +43,45 @@ userRouter.get("/allUsers/:UserId/shows-watched/:status", async (req, res) => {
     res.status(200).send(user);
 });
 
+// PUT update and add a show if a user has watched it  /users/2/shows/9
+//PUT // http://localhost:3000/user/allUsers/2/show/7/update-watched/watched
+userRouter.put("/allUsers/:UserId/show/:showId/update-watched/:status", async (req, res) => {
+    const user = await Show.Show.findByPk(req.params.showId)
+    await user.update({
+        status: req.params.status,
+        UserId: req.params.UserId
+    })
+    res.status(200).send(user);
+});
+
+
+
+// userRouter.post("/", async (req, res) => {
+//     //create the user db entry
+//     // if going to await function need to async the (req,res) function 
+//     //make sure the body send with the request MATCHES the model user,js!
+//     const user = await User.create(req.body);
+//     // very important to send something in the send ()
+//     res.status(200).send({ user });
+//   });
+
+
+// userRouter.post(
+//   "/",
+//   //check email is email
+//   body('email').isEmail(),
+//   //check password length
+//   body('password').isLength({ min: 6}),
+//   async (req, res) => {
+
+//     const errors = validatorResult(req)
+//     if (!errors.isEmpty()) {
+//       return res.status(400).send({ errors: errors.array() })
+//     }
+
+//     const user = await User.create(req.body);
+//     res.status(201).send({ user });
+//   }
+// );
 
 module.exports = userRouter;
