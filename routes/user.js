@@ -31,7 +31,7 @@ userRouter.get("/users/:id", async (req, res) => {
 
 
 // GET all shows watched by a user (user id in req.params)   /users/2/shows(watched) *
-//GET // http://localhost:3000/user/users/1/shows/watched
+//GET // http://localhost:3000/user/users/2/shows/watched
 userRouter.get("/users/:UserId/shows/:status", async (req, res) => {
     // const user = await Show.Show.findByPk(req.params.UserId);
     const user = await Show.Show.findAll({

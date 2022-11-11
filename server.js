@@ -14,6 +14,6 @@ app.use("/show", showRouter);
 // We can now make a request to our post route
 app.listen(3000, async () => {
 //   await db.sync();
-  // await seed()
+  await seed()
   console.log(`listening on port 3000`);
 });

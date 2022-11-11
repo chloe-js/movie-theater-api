@@ -64,7 +64,7 @@ showRouter.put("/shows/:id/update-status/:status", async (req, res) => {
 });
 
 // PUT update rating of a show that has been watched /shows/4/watched *
-//PUT // http://localhost:3000/show/shows/2/update-rating/4
+//PUT // http://localhost:3000/show/shows/3/update-rating/5
 showRouter.put("/shows/:id/update-rating/:rating", async (req, res) => {
   const show = await Show.Show.findByPk(req.params.id)
   await show.update({rating: req.params.rating})
