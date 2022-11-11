@@ -4,7 +4,7 @@ const User = require("../models/User");
 const Show = require("../models/Show");
 
 // Users
-//POST new user 
+//POST new user *
 //POST// http://localhost:3000/user/addNewUser
 // {
 //     "id": 3,
@@ -16,23 +16,23 @@ userRouter.post("/addNewUser", async (req, res) => {
     res.status(200).send(user);
   });
 
-// GET all users /users
-// GET // http://localhost:3000/user/allUsers
-userRouter.get("/allUsers", async (req, res) => {
+// GET all users /users *
+// GET // http://localhost:3000/user/users
+userRouter.get("/users", async (req, res) => {
     const user = await User.User.findAll()
     res.status(200).send(user);
 })
-// GET one user /users/1
-// GET // http://localhost:3000/user/allUsers/2
-userRouter.get("/allUsers/:id", async (req, res) => {
+// GET one user /users/1 *
+// GET // http://localhost:3000/user/users/2
+userRouter.get("/users/:id", async (req, res) => {
     const user = await User.User.findByPk(req.params.id)
     res.status(200).send(user);
 });
 
 
-// GET all shows watched by a user (user id in req.params)   /users/2/shows(watched)
-//GET // http://localhost:3000/user/allUsers/1/shows-watched/watched
-userRouter.get("/allUsers/:UserId/shows-watched/:status", async (req, res) => {
+// GET all shows watched by a user (user id in req.params)   /users/2/shows(watched) *
+//GET // http://localhost:3000/user/users/1/shows/watched
+userRouter.get("/users/:UserId/shows/:status", async (req, res) => {
     // const user = await Show.Show.findByPk(req.params.UserId);
     const user = await Show.Show.findAll({
         where: {
@@ -43,9 +43,9 @@ userRouter.get("/allUsers/:UserId/shows-watched/:status", async (req, res) => {
     res.status(200).send(user);
 });
 
-// PUT update and add a show if a user has watched it  /users/2/shows/9
-//PUT // http://localhost:3000/user/allUsers/2/show/7/update-watched/watched
-userRouter.put("/allUsers/:UserId/show/:showId/update-watched/:status", async (req, res) => {
+// PUT update and add a show if a user has watched it  /users/2/shows/9 *
+//PUT // http://localhost:3000/user/shows/2/show/7/update-watched/watched
+userRouter.put("/shows/:UserId/show/:showId/update-watched/:status", async (req, res) => {
     const user = await Show.Show.findByPk(req.params.showId)
     await user.update({
         status: req.params.status,
