@@ -41,5 +41,21 @@ showRouter.get("/allShows/genre/:genre", async (req, res) => {
   res.status(200).send(show);
 });
 
+// PUT update the status of a show /shows/3/updates(rating)
+// PUT // http://localhost:3000/show/allShows/11/update-status/cancelled
+showRouter.put("/allShows/:id/update-status/:status", async (req, res) => {
+  const show = await Show.Show.findByPk(req.params.id)
+  await show.update({status: req.params.status})
+  res.status(200).send(show);
+});
+
+// PUT update rating of a show that has been watched /shows/4/watched
+//PUT // http://localhost:3000/show/allShows/3/update-rating/5
+showRouter.put("/allShows/:id/update-rating/:rating", async (req, res) => {
+  const show = await Show.Show.findByPk(req.params.id)
+  await show.update({rating: req.params.rating})
+  res.status(200).send(show);
+});
+
 
 module.exports = showRouter;
