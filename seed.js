@@ -28,9 +28,9 @@ const seed = async () => {
     const UserPromises = usersData.map(user => User.create(user));
 
                                         //Show.create({'name': 'Tony', 'age': 25})
-    await Promise.all(ShowPromises); // The Promise.all() method takes an iterable of promises as an input, and returns a single Promise that resolves to an array of the results of the input promises.
-    await Promise.all(UserPromises)
-
+                                        await Promise.all(UserPromises)
+                                        
+                                        await Promise.all(ShowPromises); // The Promise.all() method takes an iterable of promises as an input, and returns a single Promise that resolves to an array of the results of the input promises.
     console.log("Shows and User database info populated!")
 }
 
