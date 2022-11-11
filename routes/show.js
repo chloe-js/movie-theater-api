@@ -58,4 +58,29 @@ showRouter.put("/allShows/:id/update-rating/:rating", async (req, res) => {
 });
 
 
+// DELETE a show
+// http://localhost:3000/show/deleteShow/House
+//DELETE // http://localhost:3000/show/deleteShow/13
+showRouter.delete("/deleteShow/:id", async (req, res) => {
+  const show = await Show.Show.findByPk(req.params.id)
+  await show.destroy({id: req.params.id})
+  res.status(200).send(show);
+  // res.status(404).send(show);
+});
+
+//POST new show
+//POST // http://localhost:3000/show/addNewShow
+// {
+//   "title": "TestShow",
+//   "genre": "Horror",
+//   "rating": 5,
+//   "status": "on-going",
+//   "UserId": 2
+// }
+showRouter.post("/addNewShow", async (req, res) => {
+  const show = await Show.Show.create(req.body);
+  res.status(200).send(show);
+});
+
+
 module.exports = showRouter;
