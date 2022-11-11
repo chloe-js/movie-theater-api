@@ -4,8 +4,6 @@ const User = require("../models/User");
 const Show = require("../models/Show");
 const { body, validationResult, param } = require('express-validator')
 
-// Shows
-
 //POST new show 
 // {
 //   "title": "TestShow",
@@ -59,11 +57,10 @@ showRouter.put(
   //check that status is not empty and char min 5 - 25 and no white space
   param('status').isLength({ min: 5, max: 20 }),
   async (req, res) => {
-    const err = validationResult(req)
+    const errors = validationResult(req)
     // const result = req.params.status > 5 && req.params.status < 25
-    console.log(err.isEmpty());
-    if (!err.isEmpty()) {
-      return res.status(400).send(err)
+    if (!errors.isEmpty()) {
+      return res.status(400).send({errors: errors.array()})
     }
     const show = await Show.Show.findByPk(req.params.id)
     await show.update({ status: req.params.status })
@@ -78,9 +75,9 @@ showRouter.put(
   //check that rating is not empty
   param('rating').isInt({ min: 0, max: 5 }),
   async (req, res) => {
-    const err = validationResult(req)
-    if (!err.isEmpty()) {
-      return res.status(400).send(err)
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+      return res.status(400).send({errors: errors.array()})
     }
     const show = await Show.Show.findByPk(req.params.id)
     await show.update({ rating: req.params.rating })
@@ -88,7 +85,7 @@ showRouter.put(
   });
 
 
-// DELETE a show *
+// DELETE a show 
 //DELETE // http://localhost:3000/show/shows/deleteShow/12
 showRouter.delete("/shows/deleteShow/:id", async (req, res) => {
   const show = await Show.Show.findByPk(req.params.id)

@@ -4,7 +4,6 @@ const User = require("../models/User");
 const Show = require("../models/Show");
 const { body, validationResult } = require('express-validator')
 
-// Users
 //POST new user 
 // {
 //     "id": 3,
